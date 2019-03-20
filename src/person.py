@@ -13,11 +13,9 @@ class Person:
 
     # Compute the age in years.
     def computeAge(self):
-        age = datetime.datetime.now() - self.DOB
-
-        print(type(age))
-
-        return age.years
+        def calculate_age(born):
+        today = date.today()
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
     def generateID(self):
         return
