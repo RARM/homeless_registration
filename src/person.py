@@ -1,11 +1,12 @@
-import datetime
+from datetime import datetime, date
 import time
 
 # DOB = datetime.datetime(yyyy, mm, dd)
-# Using the Person class. Person(name, datetime.datetime(yyyy, mm, dd), )
+# Using the Person class. Person('first name', 'last name', datetime.date(yyyy, mm, dd), [])
 class Person:
-    def __init__(self, name, DOB, physicalFeatures):
-        self.name = name
+    def __init__(self, firstName, lastName, DOB, physicalFeatures):
+        self.firstName = firstName
+        self.lastName = lastName
         self.DOB = DOB
         self.physicalFeatures = physicalFeatures
         self.signInTime = time.time()
@@ -13,20 +14,16 @@ class Person:
 
     # Compute the age in years.
     def computeAge(self):
-        age = datetime.datetime.now() - self.DOB
+        today = date.today()
+        return today.year - self.DOB.year - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
 
-        print(type(age))
-
-        return age.years
-
-    def generateID(self):
+    def generateID(self): # Generate unique ID here
         return
 
     def save(self, database): # The database argument has to be a connection
         cursor = database.cursor() # Creating the cursor
-        
-        return
+        result = cursor.execute()
+        return result
 
-person = Person("John Doe", datetime.datetime(1980, 1, 1), 0)
-
+person = Person("Mary", "Sue", date(1980, 5, 1), 0)
 print(person.age)
