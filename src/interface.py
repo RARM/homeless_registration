@@ -8,7 +8,7 @@ label_1 = Label(root, text="Username")
 label_2 = Label(root, text="Password")
 
 entry_1 = Entry(root)
-entry_2 = Entry(root)
+entry_2 = Entry(root, show="*")
 
 button_1 = Button(root, text="Login")
 button_2 = Button(root, text="Test")
