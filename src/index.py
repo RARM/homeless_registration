@@ -7,4 +7,5 @@ database_path = "database.db" # Path to database file
 # Testing the Person class
 database = Database(database_path)
 
-database.run('CREATE TABLE people (ID varchar(100), FirstName varchar(100), LastName varchar(100)), PhysicalFeatures varchar(100), RegisteredTime varchar(100), HashFinger varchar(100)')
+if not (database.check()):
+    database.run('CREATE TABLE people (ID varchar(9), FirstName varchar(100), LastName varchar(100)), Height varchar(100), EyesColor varchar(100), HairColor varchar(100), Gender varchar(100), Ethnicity varchar(100),  RegisteredTime varchar(100), HashFinger varchar(100)')
