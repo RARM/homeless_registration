@@ -1,5 +1,6 @@
 from datetime import datetime, date
 import time
+import random
 
 # DOB = datetime.datetime(yyyy, mm, dd)
 # Using the Person class. Person('first name', 'last name', datetime.date(yyyy, mm, dd), [])
@@ -20,7 +21,10 @@ class Person:
         return today.year - self.DOB.year - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
 
     def generateID(self): # Generate unique ID here
-        return
+      randomNumber = str(random.randint(100, 999))
+      initials = self.firstName[0] + self.lastName[0]
+      DOB = str(int(self.DOB.year) + int(self.DOB.month) + int(self.DOB.day))[3]
+      return randomNumber + initials + DOB
 
     def save(self, database): # The database argument has to be a connection
         cursor = database.cursor() # Creating the cursor
