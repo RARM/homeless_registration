@@ -1,4 +1,4 @@
-# from person import *
+from person import *
 from database import *
 
 # Database info

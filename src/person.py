@@ -2,38 +2,41 @@ from datetime import datetime, date
 import time
 import random
 
-# Using the Person class. Person('first name', 'last name', [yyyy, mm, dd]], [])
+# Using the Person class. Person('first name', 'last name', [yyyy, mm, dd]], ["Height", "Weight", "Eyes color", "Hair color", "Gender"], ethnicity)
 class Person:
-    def __init__(self, firstName, lastName, DOB, physicalFeatures): # Constructor
+    def __init__(self, firstName, lastName, DOB, physicalFeatures, ethnicity): # Constructor
+        self.uniqueID = self.generateID()
         self.firstName = firstName
         self.lastName = lastName
         self.DOB = date(DOB[0], DOB[1], DOB[2]) # DOB = date(yyyy, mm, dd)
         self.DOB_String = self.dateToString(DOB[0], DOB[1], DOB[2])
         self.physicalFeatures = physicalFeatures
+        # self.physicalFeatures_String = self.getStringOfList(physicalFeatures)
         self.signInTime = time.time()
         self.age = self.computeAge()
+        self.ethnicity = ethnicity
 
 
-    def dateToString(self, yyyy, mm, dd):
-        # Converting the month to a string of two character
-        if len(str(mm)) == 1:
-            month = "0" + str(mm)
-        elif len(str(mm)) == 2:
-            month =  str(mm)
-        else:
-            month = "00"
-            print("An error has occured creating the string for DOB...")
-
-        # Converting the day to a string of two characters
-        if len(str(dd)) == 1:
-            day = "0" + str(dd)
-        elif len(str(dd)) == 2:
-            day = str(dd)
-        else:
-            day = "00"
-            print("An error has occcured creating the string for DOB...")
-
-        return str(yyyy) + month + day
+#    def dateToString(self, yyyy, mm, dd): # Convert the DOB object to a
+#        # Converting the month to a string of two character
+#        if len(str(mm)) == 1:
+#            month = "0" + str(mm)
+#        elif len(str(mm)) == 2:
+#            month =  str(mm)
+#        else:
+#            month = "00"
+#            print("An error has occured creating the string for DOB...")
+#
+#        # Converting the day to a string of two characters
+#        if len(str(dd)) == 1:
+#            day = "0" + str(dd)
+#        elif len(str(dd)) == 2:
+#            day = str(dd)
+#        else:
+#            day = "00"
+#            print("An error has occcured creating the string for DOB...")
+#
+#        return str(yyyy) + month + day
 
 
     def computeAge(self): # Compute the age in years
@@ -54,6 +57,16 @@ class Person:
         content = [(self.firstName, self.lastName, self.DOB_String, self.physicalFeatures),]
         result = cursor.execute("INSERT INTO people VALUES (?, ?, ?, ?)", content)
         return result
+
+
+    @classmethod
+    def retrievePerson(myCls, ID):
+        return myCls(firstName, lastName, DOB, physicalFeatures, ethnicity)
+
+    @staticmethod
+    def retrieveList(ID, firstN, lastN, [yyyy, mm, dd])
+        return list
+
 
 # Test area
 person1 = Person("Mary", "Sue", [1980, 5, 1], 0)
