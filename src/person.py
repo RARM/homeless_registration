@@ -3,7 +3,7 @@ import time
 import random
 import sqlite3
 
-# Using the Person class. Person('first name', 'last name', [yyyy, mm, dd]], ["Height", "Weight", "Eyes color", "Hair color", "Gender"], ethnicity)
+# Using the Person class. Person('first name', 'last name', [yyyy, mm, dd], ["Height", "Weight", "Eyes color", "Hair color", "Gender"], ethnicity)
 class Person:
     def __init__(self, firstName, lastName, DOB, physicalFeatures, ethnicity): # Constructor
         self.uniqueID = self.generateID()
@@ -21,28 +21,6 @@ class Person:
         self.separatorStr = '~'
 
 
-#    def dateToString(self, yyyy, mm, dd): # Convert the DOB object to a
-#        # Converting the month to a string of two character
-#        if len(str(mm)) == 1:
-#            month = "0" + str(mm)
-#        elif len(str(mm)) == 2:
-#            month =  str(mm)
-#        else:
-#            month = "00"
-#            print("An error has occured creating the string for DOB...")
-#
-#        # Converting the day to a string of two characters
-#        if len(str(dd)) == 1:
-#            day = "0" + str(dd)
-#        elif len(str(dd)) == 2:
-#            day = str(dd)
-#        else:
-#            day = "00"
-#            print("An error has occcured creating the string for DOB...")
-#
-#        return str(yyyy) + month + day
-
-
     def computeAge(self): # Compute the age in years
         today = date.today()
         return today.year - self.DOB.year - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
@@ -56,7 +34,7 @@ class Person:
 
 
     def stringFromList(self, my_list):
-        resultant_string = my_list.split('~')
+        resultant_string = my_list.split(self.separatorStr)
         return resultant_string
 
 
