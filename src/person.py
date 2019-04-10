@@ -1,6 +1,7 @@
 from datetime import datetime, date
 import time
 import random
+import sqlite3
 
 # Using the Person class. Person('first name', 'last name', [yyyy, mm, dd]], ["Height", "Weight", "Eyes color", "Hair color", "Gender"], ethnicity)
 class Person:
@@ -11,10 +12,13 @@ class Person:
         self.DOB = date(DOB[0], DOB[1], DOB[2]) # DOB = date(yyyy, mm, dd)
         self.DOB_String = self.dateToString(DOB[0], DOB[1], DOB[2])
         self.physicalFeatures = physicalFeatures
-        # self.physicalFeatures_String = self.getStringOfList(physicalFeatures)
+        self.physicalFeatures_String = self.stringFromList(physicalFeatures)
         self.signInTime = time.time()
         self.age = self.computeAge()
         self.ethnicity = ethnicity
+
+        # Separator for list to strings in database
+        self.separatorStr = '~'
 
 
 #    def dateToString(self, yyyy, mm, dd): # Convert the DOB object to a
@@ -51,26 +55,29 @@ class Person:
       return randomNumber + initials + DOB
 
 
+    def stringFromList(self, my_list):
+        resultant_string = my_list.split('~')
+        return resultant_string
+
+
     def save(self, database): # The database argument has to be a connection
         cursor = database.cursor() # Creating the cursor
         result = cursor.execute()
-        content = [(self.firstName, self.lastName, self.DOB_String, self.physicalFeatures),]
-        result = cursor.execute("INSERT INTO people VALUES (?, ?, ?, ?)", content)
+        content = [(self.firstName, self.lastName, self.DOB_String, self.physicalFeatures_String, self.ethnicity),]
+        result = cursor.execute("INSERT INTO people VALUES (?, ?, ?, ?, ?)", content)
         return result
 
 
-    @classmethod
-    def retrievePerson(myCls, ID):
-        return myCls(firstName, lastName, DOB, physicalFeatures, ethnicity)
+#    @classmethod
+#    def retrieve(myCls, ID, database_name): # Person.retrieve(ID, database_name): Creates a person object based on a database info. The database should match the data as in the Person.save() method
+        # Creating cursor
+#        cursor = database.cursor()
+#        return myCls(firstName, lastName, DOB, physicalFeatures, ethnicity)
 
-    @staticmethod
-    def retrieveList(ID, firstN, lastN, [yyyy, mm, dd])
-        return list
+#    @staticmethod
+#    def retrieveList(ID, firstN, lastN, [yyyy, mm, dd])
+#        return list
 
 
 # Test area
-person1 = Person("Mary", "Sue", [1980, 5, 1], 0)
-print(person1.age)
-print(person1.DOB)
-print(person1.DOB_String)
-print(person1.generateID())
+person1 = Person("Mary", "Sue", [1980, 5, 1], ["5'1", "120", "Blue", "Brown", "Female"], "White")
