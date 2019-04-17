@@ -117,3 +117,20 @@ if flag == True:
     print("The color exist")
 else:
     print("Not an Eye Color")
+    
+index = 0
+flag = False
+gender = [""] * (2)
+
+gender[0] = "Male"
+gender[1] = "Female"
+print("what is the Gender?")
+personsGender = input()
+for index in range(0, 1 + 1, 1):
+    if gender[index] == personsGender:
+        flag = True
+if flag == True:
+    print("The Gender is?" + personsGender)
+else:
+    print("Not a gender")
+
