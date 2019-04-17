@@ -65,33 +65,37 @@ class Person:
 #    def retrieveList(ID, firstN, lastN, [yyyy, mm, dd])
 #        return list
 
+    @staticmethod
+    def hairColorTest(hairColor): # hairColorTest: return true if argument is a valid hair color
+        flag = False
+        hairColor = [""] * (10)
+
+        # List of valid hair colors
+        hairColor[0] = "Orange"
+        hairColor[1] = "Blue"
+        hairColor[2] = "Black"
+        hairColor[3] = "Brown"
+        hairColor[4] = "Blonde"
+        hairColor[5] = "Green"
+        hairColor[6] = "Yellow"
+        hairColor[7] = "Red"
+        hairColor[8] = "Dyed"
+        hairColor[9] = "Grey"
+
+        color = hairColor
+        
+        for index in range(0, 9 + 1, 1):
+            if color == hairColor[index]:
+                flag = True
+        return flag
+
 
 # Test block
 person1 = Person("Mary", "Sue", [1980, 5, 1], ["5'1", "120", "Blue", "Brown", "Female"], "White")
 print(person1.uniqueID)
 
-flag = False
-hairColor = [""] * (10)
 
-hairColor[0] = "Orange"
-hairColor[1] = "Blue"
-hairColor[2] = "Black"
-hairColor[3] = "Brown"
-hairColor[4] = "Blonde"
-hairColor[5] = "Green"
-hairColor[6] = "Yellow"
-hairColor[7] = "Red"
-hairColor[8] = "Dyed"
-hairColor[9] = "Grey"
-print("what is the hairColor")
-color = input()
-for index in range(0, 9 + 1, 1):
-    if color == hairColor[index]:
-        flag = True
-if flag == True:
-    print(" Hair Color Accepted " + color)
-else:
-    print("This is Not a Hair Color")
+# Joseph eye color test
 index = 0
 eyeColor = [""] * (8)
 
