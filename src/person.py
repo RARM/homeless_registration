@@ -5,7 +5,7 @@ import sqlite3
 
 # Using the Person class. Person('first name', 'last name', [yyyy, mm, dd], ["Height", "Weight", "Eyes color", "Hair color", "Gender"], ethnicity)
 class Person:
-    def __init__(self, firstName, lastName, DOB, physicalFeatures, ethnicity, uniqueID=NULL, signInTime=time.time()): # Constructor
+    def __init__(self, firstName, lastName, DOB, physicalFeatures, ethnicity, uniqueID=None, signInTime=time.time()): # Constructor
         # Settings
         self.separatorStr = '~' # Separator for list to strings in database
 
@@ -18,11 +18,11 @@ class Person:
         self.signInTime = signInTime
 
         # Variables calculated with the class methods
-        self.DOB_String = self.dateToString(DOB[0], DOB[1], DOB[2])
+        self.DOB_String = str(DOB[0]) + str(DOB[1]) + str(DOB[2])
         self.age = self.computeAge()
         self.physicalFeatures_String = self.stringFromList(physicalFeatures)
 
-        if uniqueID = NULL:
+        if uniqueID == None:
             self.uniqueID = self.generateID()
         else:
             self.uniqueID = uniqueID
@@ -43,7 +43,7 @@ class Person:
 
 
     def stringFromList(self, my_list):
-        resultant_string = my_list.split(self.separatorStr)
+        resultant_string = self.separatorStr.join(str(x) for x in my_list)
         return resultant_string
 
 
@@ -65,6 +65,7 @@ class Person:
 #    def retrieveList(ID, firstN, lastN, [yyyy, mm, dd])
 #        return list
 
+    # Static Methods below ----------
     @staticmethod
     def hairColorTest(hairColor): # hairColorTest: return true if argument is a valid hair color
         flag = False
@@ -90,64 +91,60 @@ class Person:
         return flag
 
 
+    def eyeColorTest(eyeColor): # eyeColorTest: return true if argument is a valid eye color
+        index = 0
+        eyeColor = [""] * (8)
+
+        eyeColor[0] = "Blue"
+        eyeColor[1] = "Green"
+        eyeColor[2] = "Red"
+        eyeColor[3] = "Orange"
+        eyeColor[4] = "Black"
+        eyeColor[5] = "Grey"
+        eyeColor[6] = "Brown"
+        eyeColor[7] = "Hazel"
+        flag = False
+
+        color = eyeColor.lower()
+        for index in range(0, 7 + 1, 1):
+            if eyeColor[index] == color:
+                flag = True
+
+        return flag
+
+
+    def genderTest(personsGender): # genderTest: return true if argument is a valid gender
+        index = 0
+        flag = False
+        gender = [""] * (2)
+
+        gender[0] = "Male"
+        gender[1] = "Female"
+
+        for index in range(0, 1 + 1, 1):
+            if gender[index] == personsGender:
+                flag = True
+
+        return flag
+
+
+    def ethnicityTest(personsEthnicity):
+        index = 0
+        flag = False
+        ethnicity = [""] * (4)
+
+        ethnicity[0] = "White"
+        ethnicity[1] = "Spanish"
+        ethnicity[2] = "African American"
+        ethnicity[3] = "Alaskin"
+
+        for index in range(0, 3 + 1, 1):
+            if ethnicity[index] == personsEthnicity:
+                flag = True
+        return flag
+
+
 # Test block
 person1 = Person("Mary", "Sue", [1980, 5, 1], ["5'1", "120", "Blue", "Brown", "Female"], "White")
 print(person1.uniqueID)
-
-
-# Joseph eye color test
-index = 0
-eyeColor = [""] * (8)
-
-eyeColor[0] = "Blue"
-eyeColor[1] = "Green"
-eyeColor[2] = "Red"
-eyeColor[3] = "Orange"
-eyeColor[4] = "Black"
-eyeColor[5] = "Grey"
-eyeColor[6] = "Brown"
-eyeColor[7] = "Hazel"
-flag = False
-print("what is the eye color?")
-color = input()
-for index in range(0, 7 + 1, 1):
-    if eyeColor[index] == color:
-        flag = True
-if flag == True:
-    print("The color exist")
-else:
-    print("Not an Eye Color")
-    
-index = 0
-flag = False
-gender = [""] * (2)
-
-gender[0] = "Male"
-gender[1] = "Female"
-print("what is the Gender?")
-personsGender = input()
-for index in range(0, 1 + 1, 1):
-    if gender[index] == personsGender:
-        flag = True
-if flag == True:
-    print("The Gender is?" + personsGender)
-else:
-    print("Not a gender")
-
-index = 0
-flag = False
-ethnicity = [""] * (4)
-
-ethnicity[0] = "White"
-ethnicity[1] = "Spanish"
-ethnicity[2] = "African American"
-ethnicity[3] = "Alaskin"
-print("what is the Ethnicity?")
-personsEthnicity = input()
-for index in range(0, 3 + 1, 1):
-    if ethnicity[index] == personsEthnicity:
-        flag = True
-if flag == True:
-    print("The Persons Ethnicity is?" + personsEthnicity)
-else:
-    print("Not a Ethnic Background")
+print(Person.ethnicityTest("White"))
