@@ -1,8 +1,14 @@
 from tkinter import *
 
-def menu_return():
+def menu_return1():
     f3_1.pack_forget()
     f3_2.pack_forget()
+    f2_2.pack()
+    f2_1.pack()
+
+def menu_return2():
+    f5.pack_forget()
+    f5.pack_forget()
     f2_2.pack()
     f2_1.pack()
 
@@ -33,11 +39,19 @@ def submit_search(day_var, month_var, year_var):
             print("Error: " + str(year_var) + " is not a leap year")
         else:
             print("Date of birth accepted")
+            f3_1.pack_forget()
+            f3_2.pack_forget()
+            f5.pack()
     elif day_var == 31 and month_var in test_months:
         print("Error: " + month_var + " does not have 31 days")
     else:
         print("Date of birth accepted")
+        f3_1.pack_forget()
+        f3_2.pack_forget()
+        f5.pack()
 
+
+resultsList = ["John", "Connor", "Joe", "Sam", "Bill"]
 
 root = Tk()
 root.title("Homeless Registry")
@@ -49,6 +63,7 @@ f2_2 = Frame(root, height=65)  # Search or create frame buffer
 f3_1 = Frame(root)  # Search form frame 1
 f3_2 = Frame(root)  # Search form frame 2
 f4 = Frame(root)  # Create entry frame
+f5 = Frame(root)  # Search returns
 
 # LOGIN FRAME f1
 f1_label_username = Label(f1, text="Username")
@@ -97,8 +112,8 @@ f3_label_or = Label(f3_1, text="OR")
 f3_entry_ID = Entry(f3_1)
 f3_entry_first_name = Entry(f3_1)
 f3_entry_last_name = Entry(f3_1)
-# DROP DOWN MENU FOR DOB
 
+# DROP DOWN MENU FOR DOB
 dayChoices = []
 for i in range(1, 32, 1):
     dayChoices.append(i)
@@ -114,7 +129,7 @@ for i in range(1920, 2020, 1):
 f3_year_dropdown = OptionMenu(f3_2, year_var, *yearChoices)
 
 f3_button_submit = Button(f3_2, text="Submit", command=lambda: submit_search(day_var.get(), month_var.get(), year_var.get()))
-f3_back_to_menu = Button(f3_1, text="<-- Main Menu", command=lambda: menu_return())
+f3_back_to_menu = Button(f3_1, text="<-- Main Menu", command=lambda: menu_return1())
 
 f3_back_to_menu.grid(row=0)
 
@@ -134,6 +149,22 @@ f3_entry_ID.grid(row=1, column=1)
 f3_entry_first_name.grid(row=3, column=1)
 f3_entry_last_name.grid(row=4, column=1)
 
+# SEARCH RETURNS
+f5_back_to_menu = Button(f5, text="<-- Main Menu", command=lambda: menu_return2())
+resultsTable = Listbox(f5, font="ansifixed")
+
+maxChar = len(resultsList[0])
+for i in resultsList:
+    if len(i) > maxChar:
+        maxChar = len(i)
+for i in resultsList:
+    while len(i) < maxChar:
+        i += "0"
+    resultsTable.insert(END, i)
+    print(maxChar)
+
+resultsTable.grid(row=1)
+f5_back_to_menu.grid(row=0)
 
 
 
