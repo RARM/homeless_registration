@@ -92,3 +92,24 @@ if flag == True:
     print(" Hair Color Accepted " + color)
 else:
     print("This is Not a Hair Color")
+index = 0
+eyeColor = [""] * (8)
+
+eyeColor[0] = "Blue"
+eyeColor[1] = "Green"
+eyeColor[2] = "Red"
+eyeColor[3] = "Orange"
+eyeColor[4] = "Black"
+eyeColor[5] = "Grey"
+eyeColor[6] = "Brown"
+eyeColor[7] = "Hazel"
+flag = False
+print("what is the eye color?")
+color = input()
+for index in range(0, 7 + 1, 1):
+    if eyeColor[index] == color:
+        flag = True
+if flag == True:
+    print("The color exist")
+else:
+    print("Not an Eye Color")
