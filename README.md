@@ -22,4 +22,4 @@ Folders | Description
 `Notes` | Contain project objectives.
 
 #### Source Code
-The program is not working yet. The `src` folder contain all the files available so far. A more detailed explanation is available in the [`docs`](docs/index.md) folder or visit the [GitHub Page](https://RARM.github.com/homeless_registration) version.
+The program is not working yet. The `src` folder contain all the files available so far. A more detailed explanation is available in the [`docs`](docs/index.md) folder or visit the [GitHub Page](https://RARM.github.io/homeless_registration) version.
